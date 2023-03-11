@@ -1,0 +1,7 @@
+#!/bin/sh
+
+users=$(ls /home)
+for i in $users; do 
+	rsync -Caz /etc/skel/ /home/$i/
+	chown $i:$i -R /home/$i/
+done

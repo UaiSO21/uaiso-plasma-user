@@ -1,0 +1,10 @@
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = uaiso-skel-plasma
+
+[Action]
+Description = Updates the user interface
+When = PostTransaction
+Exec = /usr/share/libalpm/scripts/uaiso-plasma-user
