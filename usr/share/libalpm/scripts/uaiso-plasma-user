@@ -1,7 +1,9 @@
 #!/bin/sh
 
-users=$(ls /home)
-for i in $users; do 
-	rsync -Caz /etc/skel/ /home/$i/
-	chown $i:$i -R /home/$i/
+# users=$(ls /home)
+users=$(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1)
+for i in ${users[@]}; do 
+	rsync -Cazog --chown=$i:$i /etc/skel/ /home/$i/
+# 	chown $i:$i -R /home/$i/
 done
+
